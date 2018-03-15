@@ -25,11 +25,11 @@ public:
      */
     D3DXQUATERNION()
     {
-		x = 0.0f;
-		y = 0.0f;
-		z = 0.0f;
-		w = 1.0f;
-	}
+        x = 0.0f;
+        y = 0.0f;
+        z = 0.0f;
+        w = 1.0f;
+    }
 };
 
 /**
@@ -37,20 +37,20 @@ public:
  * @param pOut
  * @return
  */
-D3DXQUATERNION *D3DXQuaternionIdentity(D3DXQUATERNION *pOut)
+D3DXINLINE D3DXQUATERNION *D3DXQuaternionIdentity(D3DXQUATERNION *pOut)
 {
-    #ifdef D3DX_POINTER_CHECK
-        if(pOut == NULL) {
-		    pOut = new D3DXQUATERNION();
-        }
-    #endif
-	
-    pOut->x = 0.0f;
-	pOut->y = 0.0f;
-	pOut->z = 0.0f;
-	pOut->w = 1.0f;
+#ifdef D3DX_POINTER_CHECK
+    if (pOut == NULL) {
+        pOut = new D3DXQUATERNION();
+    }
+#endif
 
-	return pOut;
+    pOut->x = 0.0f;
+    pOut->y = 0.0f;
+    pOut->z = 0.0f;
+    pOut->w = 1.0f;
+
+    return pOut;
 }
 
 /**
@@ -60,24 +60,24 @@ D3DXQUATERNION *D3DXQuaternionIdentity(D3DXQUATERNION *pOut)
  * @param Angle
  * @return
  */
-D3DXQUATERNION *D3DXQuaternionRotationAxis(D3DXQUATERNION *pOut, const D3DXVECTOR3 * pV, float Angle)
+D3DXINLINE D3DXQUATERNION *D3DXQuaternionRotationAxis(D3DXQUATERNION *pOut, const D3DXVECTOR3 * pV, float Angle)
 {
-    #ifdef D3DX_POINTER_CHECK
-        if(pOut == NULL) {
-		    pOut = new D3DXQUATERNION();
-        }
-    #endif
+#ifdef D3DX_POINTER_CHECK
+    if (pOut == NULL) {
+        pOut = new D3DXQUATERNION();
+    }
+#endif
 
-	Angle /= 2.0f;
+    Angle /= 2.0f;
 
-	float sinAngle = sinf(Angle);
+    float sinAngle = sinf(Angle);
 
     pOut->x = (sinAngle * pV->x);
     pOut->y = (sinAngle * pV->y);
     pOut->z = (sinAngle * pV->z);
-	pOut->w = cosf(Angle);
+    pOut->w = cosf(Angle);
 
-	return pOut;
+    return pOut;
 }
 
 /**
@@ -87,13 +87,13 @@ D3DXQUATERNION *D3DXQuaternionRotationAxis(D3DXQUATERNION *pOut, const D3DXVECTO
  * @param pV1
  * @return
  */
-D3DXQUATERNION *D3DXQuaternionRotationVec3toVec3(D3DXQUATERNION *pOut, const D3DXVECTOR3 * pV0, const D3DXVECTOR3 * pV1)
+D3DXINLINE D3DXQUATERNION *D3DXQuaternionRotationVec3toVec3(D3DXQUATERNION *pOut, const D3DXVECTOR3 * pV0, const D3DXVECTOR3 * pV1)
 {
-    #ifdef D3DX_POINTER_CHECK
-        if(pOut == NULL) {
-            pOut = new D3DXQUATERNION();
-        }
-    #endif
+#ifdef D3DX_POINTER_CHECK
+    if (pOut == NULL) {
+        pOut = new D3DXQUATERNION();
+    }
+#endif
 
     D3DXVECTOR3 axis;
     D3DXVec3Cross(&axis, pV0, pV1);
@@ -110,12 +110,12 @@ D3DXQUATERNION *D3DXQuaternionRotationVec3toVec3(D3DXQUATERNION *pOut, const D3D
  * @param pQ2
  * @return
  */
-inline float D3DXQuaternionDot(const D3DXQUATERNION *pQ1, const D3DXQUATERNION *pQ2)
+D3DXINLINE float D3DXQuaternionDot(const D3DXQUATERNION *pQ1, const D3DXQUATERNION *pQ2)
 {
     return (pQ1->x * pQ2->x +
-            pQ1->y * pQ2->y +
-            pQ1->z * pQ2->z +
-            pQ1->w * pQ2->w);
+        pQ1->y * pQ2->y +
+        pQ1->z * pQ2->z +
+        pQ1->w * pQ2->w);
 }
 
 /**
@@ -126,17 +126,17 @@ inline float D3DXQuaternionDot(const D3DXQUATERNION *pQ1, const D3DXQUATERNION *
  * @param t
  * @return
  */
-inline D3DXQUATERNION* D3DXQuaternionSlerp(D3DXQUATERNION *pOut, const D3DXQUATERNION *pQ1, const D3DXQUATERNION *pQ2, float t)
+D3DXINLINE D3DXQUATERNION* D3DXQuaternionSlerp(D3DXQUATERNION *pOut, const D3DXQUATERNION *pQ1, const D3DXQUATERNION *pQ2, float t)
 {
-    #ifdef D3DX_POINTER_CHECK
-        if(pOut == NULL) {
-		    pOut = new D3DXQUATERNION();
-        }
-    #endif
+#ifdef D3DX_POINTER_CHECK
+    if (pOut == NULL) {
+        pOut = new D3DXQUATERNION();
+    }
+#endif
 
     float theta = acosf(D3DXQuaternionDot(pQ1, pQ2));
 
-	float sinTheta = sinf(theta);
+    float sinTheta = sinf(theta);
 
     float t1 = sinf((1.0f - t) * theta) / sinTheta;
     float t2 = sinf(t * theta) / sinTheta;
@@ -146,7 +146,7 @@ inline D3DXQUATERNION* D3DXQuaternionSlerp(D3DXQUATERNION *pOut, const D3DXQUATE
     pOut->z = pQ1->z * t1 + pQ2->z * t2;
     pOut->w = pQ1->w * t1 + pQ2->w * t2;
 
-	return pOut;
+    return pOut;
 }
 
 #endif //D3DXQUATERNION_HPP

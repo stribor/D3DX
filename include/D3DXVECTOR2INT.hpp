@@ -15,14 +15,16 @@
 class D3DXVECTOR2INT
 {
 public:
-	int		x, y;
+    int x, y;
 
     /**
      * @brief D3DXVECTOR2INT
      */
     D3DXVECTOR2INT()
     {
-	}
+        x = 0;
+        y = 0;
+    }
 
     /**
      * @brief D3DXVECTOR2INT
@@ -31,9 +33,9 @@ public:
      */
     D3DXVECTOR2INT(int x, int y)
     {
-		this->x = x;
-		this->y = y;
-	}
+        this->x = x;
+        this->y = y;
+    }
 
     /**
      * @brief isTheSame
@@ -43,7 +45,7 @@ public:
     bool isTheSame(const D3DXVECTOR2INT &a)
     {
         return ((a.x == x) && (a.y == y));
-	}
+    }
 
     /**
      * @brief Clip cipls the vector in the bounding box [0, width - 1] x [0, height - 1]
@@ -52,13 +54,14 @@ public:
      */
     void clip(int width, int height)
     {
-		//X clipping
+        //X clipping
         x = x > (width - 1) ? (width - 1) : x;
         x = x < 0 ? 0 : x;
-		//Y clipping
+
+        //Y clipping
         y = y > (height - 1) ? (height - 1) : y;
         y = y < 0 ? 0 : x;
-	}
+    }
 };
 
 #endif //D3DXVECTOR2_INT_HPP

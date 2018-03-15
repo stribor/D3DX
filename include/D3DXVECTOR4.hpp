@@ -12,13 +12,17 @@
 /**
  * @brief The D3DXVECTOR4 class
  */
-class D3DXVECTOR4{
+class D3DXVECTOR4 {
 public:
     float x, y, z, w;
 
     D3DXVECTOR4()
     {
-	}
+        x = 0.0f;
+        y = 0.0f;
+        z = 0.0f;
+        w = 0.0f;
+    }
 
     /**
      * @brief D3DXVECTOR4
@@ -27,7 +31,7 @@ public:
     D3DXVECTOR4(float a)
     {
         x = y = z = w = a;
-	}
+    }
 
     /**
      * @brief D3DXVECTOR4
@@ -38,11 +42,11 @@ public:
      */
     D3DXVECTOR4(float x, float y, float z, float w)
     {
-		this->x = x;
-		this->y = y;
-		this->z = z;
-		this->w = w;
-	}
+        this->x = x;
+        this->y = y;
+        this->z = z;
+        this->w = w;
+    }
 
     /**
      * @brief operator -
@@ -52,7 +56,7 @@ public:
     D3DXVECTOR4 operator -(const D3DXVECTOR4 &v) const
     {
         return D3DXVECTOR4(x - v.x, y - v.y, z - v.z, w - v.w);
-	}
+    }
 
     /**
      * @brief operator -
@@ -60,8 +64,8 @@ public:
      */
     D3DXVECTOR4 operator -()const
     {
-		return D3DXVECTOR4(-x, -y, -z, -w);
-	}
+        return D3DXVECTOR4(-x, -y, -z, -w);
+    }
 
     /**
      * @brief operator -=
@@ -69,11 +73,11 @@ public:
      */
     void operator -=(const D3DXVECTOR4 &v)
     {
-		x -= v.x;
-		y -= v.y;
-		z -= v.z;
+        x -= v.x;
+        y -= v.y;
+        z -= v.z;
         w -= v.w;
-	}
+    }
 
     /**
      * @brief operator +
@@ -83,7 +87,7 @@ public:
     D3DXVECTOR4 operator +(const D3DXVECTOR4 &v) const
     {
         return D3DXVECTOR4(x + v.x, y + v.y, z + v.z, w + v.w);
-	}
+    }
 
     /**
      * @brief operator +=
@@ -91,11 +95,11 @@ public:
      */
     void operator +=(const D3DXVECTOR4 &v)
     {
-		x += v.x;
-		y += v.y;
-		z += v.z;
+        x += v.x;
+        y += v.y;
+        z += v.z;
         w += v.w;
-	}
+    }
 
     /**
      * @brief operator /
@@ -104,8 +108,8 @@ public:
      */
     D3DXVECTOR4 operator /(const D3DXVECTOR4 &v) const
     {
-		return D3DXVECTOR4(x/v.x, y/v.y, z/v.z, w/v.w);
-	}
+        return D3DXVECTOR4(x / v.x, y / v.y, z / v.z, w / v.w);
+    }
 
     /**
      * @brief operator /=
@@ -114,11 +118,11 @@ public:
      */
     void operator /=(const D3DXVECTOR4 &v)
     {
-		x /= v.x;
-		y /= v.y;
-		z /= v.z;
-		w /= v.w;
-	}
+        x /= v.x;
+        y /= v.y;
+        z /= v.z;
+        w /= v.w;
+    }
 
     /**
      * @brief operator *
@@ -128,7 +132,7 @@ public:
     D3DXVECTOR4 operator *(const D3DXVECTOR4 &v)const
     {
         return D3DXVECTOR4(x * v.x, y * v.y, z * v.z, w * v.w);
-	}
+    }
 
     /**
      * @brief operator *
@@ -138,19 +142,19 @@ public:
     D3DXVECTOR4 operator *(const float &a)const
     {
         return D3DXVECTOR4(x * a, y * a, z * a, w * a);
-	}
-	
+    }
+
     /**
      * @brief operator *=
      * @param a
      */
     void operator *=(const float &a)
     {
-		x *= a;
-		y *= a;
-		z *= a;
-		w *= a;
-	}
+        x *= a;
+        y *= a;
+        z *= a;
+        w *= a;
+    }
 
     /**
      * @brief operator =
@@ -159,9 +163,9 @@ public:
      */
     D3DXVECTOR4 operator = (const float v[4])
     {
-		return D3DXVECTOR4(v[0], v[1], v[2], v[3]);
-	}
-	
+        return D3DXVECTOR4(v[0], v[1], v[2], v[3]);
+    }
+
     /**
      * @brief operator /
      * @param a
@@ -169,11 +173,11 @@ public:
      */
     D3DXVECTOR4 operator /(const float &a)const
     {
-		if(a!=0.0f)
+        if (a != 0.0f)
             return D3DXVECTOR4(x / a, y / a, z / a, w / a);
-		else
-			return D3DXVECTOR4(x, y, z, w);
-	}
+        else
+            return D3DXVECTOR4(x, y, z, w);
+    }
 
     /**
      * @brief operator /=
@@ -181,13 +185,13 @@ public:
      */
     void operator /=(const float &a)
     {
-		if(a!=0.0f){
-			x /= a;
-			y /= a;
-			z /= a;
-			w /= a;
-		}
-	}
+        if (a != 0.0f) {
+            x /= a;
+            y /= a;
+            z /= a;
+            w /= a;
+        }
+    }
 
     /**
      * @brief operator []
@@ -196,18 +200,18 @@ public:
      */
     float operator [](int i) const
     {
-		switch(i){
-			case 0:
-				return x; break;
-			case 1:
-				return y; break;
-			case 2:
-				return z; break;
-			case 3:
-				return w; break;
-		}
-		return -1.0f;
-	}
+        switch (i) {
+        case 0:
+            return x; break;
+        case 1:
+            return y; break;
+        case 2:
+            return z; break;
+        case 3:
+            return w; break;
+        }
+        return -1.0f;
+    }
 
     /**
      * @brief operator []
@@ -216,18 +220,18 @@ public:
      */
     float &operator [](int i)
     {
-		switch(i){
-			case 0:
-				return x; break;
-			case 1:
-				return y; break;
-			case 2:
-				return z; break;
-			case 3:
-				return w; break;
-		}
-		return x;
-	}
+        switch (i) {
+        case 0:
+            return x; break;
+        case 1:
+            return y; break;
+        case 2:
+            return z; break;
+        case 3:
+            return w; break;
+        }
+        return x;
+    }
 };
 
 #endif //D3DXVECTOR4_HPP

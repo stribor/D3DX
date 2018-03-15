@@ -11,67 +11,69 @@
 
 #include <stdio.h>
 
+#include "D3DXBase.hpp"
+
 #include "D3DXVECTOR3.hpp"
 
 /**
- * @brief fscanfVet
+ * @brief D3DXVec3fscanf
  * @param file
  * @param vet
  */
-void fscanfVet(FILE *file, D3DXVECTOR3 *vet)
+D3DXINLINE void D3DXVec3fscanf(FILE *file, D3DXVECTOR3 *vet)
 {
-    if(vet == NULL) {
-		return;
-    }
-
-	fscanf(file, "%f", &vet->x);
-	fscanf(file, "%f", &vet->y);
-	fscanf(file, "%f", &vet->z);
-}
-
-/**
- * @brief fscanfVet
- * @param file
- * @param vet
- */
-void fscanfVet(FILE *file, float *vet)
-{
-    if(vet == NULL) {
+    if (vet == NULL) {
         return;
     }
 
-	fscanf(file, "%f", &vet[0]);
-	fscanf(file, "%f", &vet[1]);
-	fscanf(file, "%f", &vet[2]);
+    fscanf(file, "%f", &vet->x);
+    fscanf(file, "%f", &vet->y);
+    fscanf(file, "%f", &vet->z);
 }
 
 /**
- * @brief fscanfVet
+ * @brief D3DXArrayfscanf
  * @param file
  * @param vet
  */
-void fscanfVet(FILE *file, D3DXVECTOR2 *vet)
+D3DXINLINE void D3DXArrayfscanf(FILE *file, float *vet)
 {
-	fscanf(file, "%f", &vet->x);
-	fscanf(file, "%f", &vet->y);
+    if (vet == NULL) {
+        return;
+    }
+
+    fscanf(file, "%f", &vet[0]);
+    fscanf(file, "%f", &vet[1]);
+    fscanf(file, "%f", &vet[2]);
 }
 
 /**
- * @brief printfVet
+ * @brief D3DXVec2fscanf
+ * @param file
  * @param vet
  */
-void printfVet(const D3DXVECTOR3 *vet)
+D3DXINLINE void D3DXVec2fscanf(FILE *file, D3DXVECTOR2 *vet)
 {
-    printf(" %f %f %f\n", vet->x, vet->y, vet->z);
+    fscanf(file, "%f", &vet->x);
+    fscanf(file, "%f", &vet->y);
 }
 
 /**
- * @brief printfVet
- * @param vet
- */
-void printfVet(D3DXVECTOR2 *vet)
+* @brief D3DXVec2printf
+* @param vet
+*/
+D3DXINLINE void D3DXVec2printf(D3DXVECTOR2 *vet)
 {
     printf(" %f %f\n", vet->x, vet->y);
+}
+
+/**
+ * @brief D3DXVec3printf
+ * @param vet
+ */
+D3DXINLINE void D3DXVec3printf(const D3DXVECTOR3 *vet)
+{
+    printf(" %f %f %f\n", vet->x, vet->y, vet->z);
 }
 
 #endif //D3DX_IO_FUNCTIONS_HPP

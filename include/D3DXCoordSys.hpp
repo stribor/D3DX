@@ -12,7 +12,7 @@
 #include <math.h>
 #include <cmath>
 
-#include "math_constant.hpp"
+#include "D3DXMathConstants.hpp"
 #include "D3DXFunctions.hpp"
 #include "D3DXVECTOR2.hpp"
 #include "D3DXVECTOR3.hpp"
@@ -30,16 +30,16 @@
 * @param out
 * @return
 */
-D3DXVECTOR2 *D3DXVecToAng(const D3DXVECTOR3 *dir, D3DXVECTOR2 *out)
+D3DXINLINE D3DXVECTOR2 *D3DXVecToAng(const D3DXVECTOR3 *dir, D3DXVECTOR2 *out)
 {
 
 #ifdef D3DX_POINTER_CHECK
-    if(out == NULL) {
+    if (out == NULL) {
         out = new D3DXVECTOR2();
     }
 #endif
 
-    out->x = acosf( dir->y);
+    out->x = acosf(dir->y);
     out->y = atan2f(dir->z, dir->x);
 
     return out;
@@ -51,10 +51,10 @@ D3DXVECTOR2 *D3DXVecToAng(const D3DXVECTOR3 *dir, D3DXVECTOR2 *out)
 * @param out
 * @return
 */
-D3DXVECTOR2 *D3DXVecToTexCoord(const D3DXVECTOR3 *dir, D3DXVECTOR2 *pOut)
+D3DXINLINE D3DXVECTOR2 *D3DXVecToTexCoord(const D3DXVECTOR3 *dir, D3DXVECTOR2 *pOut)
 {
 #ifdef D3DX_POINTER_CHECK
-    if(pOut == NULL) {
+    if (pOut == NULL) {
         pOut = new D3DXVECTOR2();
     }
 #endif
@@ -72,10 +72,10 @@ D3DXVECTOR2 *D3DXVecToTexCoord(const D3DXVECTOR3 *dir, D3DXVECTOR2 *pOut)
 * @param out
 * @return
 */
-D3DXVECTOR3 *D3DXAngToVec(const D3DXVECTOR2 *dir, D3DXVECTOR3 *out)
+D3DXINLINE D3DXVECTOR3 *D3DXAngToVec(const D3DXVECTOR2 *dir, D3DXVECTOR3 *out)
 {
 #ifdef D3DX_POINTER_CHECK
-    if(out == NULL) {
+    if (out == NULL) {
         out = new D3DXVECTOR3();
     }
 #endif
@@ -97,15 +97,15 @@ D3DXVECTOR3 *D3DXAngToVec(const D3DXVECTOR2 *dir, D3DXVECTOR3 *out)
 * @param out
 * @return
 */
-inline D3DXVECTOR3 *D3DXImgCoordToVec(float x, float y, int width, int height, D3DXVECTOR3 *pOut)
+D3DXINLINE D3DXVECTOR3 *D3DXImgCoordToVec(float x, float y, int width, int height, D3DXVECTOR3 *pOut)
 {
 #ifdef D3DX_POINTER_CHECK
-    if(pOut == NULL) {
+    if (pOut == NULL) {
         pOut = new D3DXVECTOR3();
     }
 #endif
 
-    float phi   = (C_PI_2 * x) / float(width);
+    float phi = (C_PI_2 * x) / float(width);
     float theta = (C_PI   * y) / float(height);
 
     float sinTheta = sinf(theta);
@@ -123,18 +123,20 @@ inline D3DXVECTOR3 *D3DXImgCoordToVec(float x, float y, int width, int height, D
 * @param u
 * @param v
 */
-void CreateOrthoNormalBase(const D3DXVECTOR3 *n, D3DXVECTOR3 *u, D3DXVECTOR3 *v)
+D3DXINLINE void CreateOrthoNormalBase(const D3DXVECTOR3 *n, D3DXVECTOR3 *u, D3DXVECTOR3 *v)
 {
-    if(fabsf(n->z) > D3DX_COORDSYS_EPSILON) {
-        v->x =  0.0f;
-        v->y =  n->z;
+    if (fabsf(n->z) > D3DX_COORDSYS_EPSILON) {
+        v->x = 0.0f;
+        v->y = n->z;
         v->z = -n->y;
-    } else {
-        if(fabsf(n->x) > D3DX_COORDSYS_EPSILON) {
-            v->x =  n->z;
-            v->y =  0.0f;
+    }
+    else {
+        if (fabsf(n->x) > D3DX_COORDSYS_EPSILON) {
+            v->x = n->z;
+            v->y = 0.0f;
             v->z = -n->x;
-        } else {
+        }
+        else {
             v->x = n->y;
             v->y = 0.0f;
             v->z = 0.0f;
@@ -157,14 +159,14 @@ void CreateOrthoNormalBase(const D3DXVECTOR3 *n, D3DXVECTOR3 *u, D3DXVECTOR3 *v)
 * @param pOut
 * @return
 */
-D3DXVECTOR3 *D3DXVecProjBase(const D3DXVECTOR3 *V0,
-                             const D3DXVECTOR3 *V1,
-                             const D3DXVECTOR3 *V2,
-                             const D3DXVECTOR3 *pV,
-                             D3DXVECTOR3 *pOut)
+D3DXINLINE D3DXVECTOR3 *D3DXVecProjBase(const D3DXVECTOR3 *V0,
+    const D3DXVECTOR3 *V1,
+    const D3DXVECTOR3 *V2,
+    const D3DXVECTOR3 *pV,
+    D3DXVECTOR3 *pOut)
 {
 #ifdef D3DX_POINTER_CHECK
-    if(pOut == NULL) {
+    if (pOut == NULL) {
         pOut = new D3DXVECTOR3();
     }
 #endif
@@ -185,21 +187,21 @@ D3DXVECTOR3 *D3DXVecProjBase(const D3DXVECTOR3 *V0,
 * @param pOut
 * @return
 */
-D3DXVECTOR3 *D3DXVecApplyBase(	const D3DXVECTOR3 *V0,
-                              const D3DXVECTOR3 *V1,
-                              const D3DXVECTOR3 *V2,
-                              const D3DXVECTOR3 *pV,
-                              D3DXVECTOR3 *pOut)
+D3DXINLINE D3DXVECTOR3 *D3DXVecApplyBase(const D3DXVECTOR3 *V0,
+    const D3DXVECTOR3 *V1,
+    const D3DXVECTOR3 *V2,
+    const D3DXVECTOR3 *pV,
+    D3DXVECTOR3 *pOut)
 {
 #ifdef D3DX_POINTER_CHECK
-    if(pOut == NULL) {
+    if (pOut == NULL) {
         pOut = new D3DXVECTOR3();
     }
 #endif
 
     *pOut = (*V0) * pV->x +
-            (*V1) * pV->y +
-            (*V2) * pV->z;
+        (*V1) * pV->y +
+        (*V2) * pV->z;
 
     return pOut;
 }
@@ -208,13 +210,14 @@ D3DXVECTOR3 *D3DXVecApplyBase(	const D3DXVECTOR3 *V0,
 * @brief DecompressNormals decompresses normals.
 * @param n
 */
-void DecompressNormals(D3DXVECTOR3 *n)
+D3DXINLINE void DecompressNormals(D3DXVECTOR3 *n)
 {
     float tmp = 1.0f - n->x * n->x - n->y * n->y;
 
-    if(tmp > 0.0f) {
+    if (tmp > 0.0f) {
         n->z = sqrtf(tmp);
-    } else {
+    }
+    else {
         n->z = 0.0f;
         D3DXVec3Normalize(n, n);
     }
@@ -227,10 +230,10 @@ void DecompressNormals(D3DXVECTOR3 *n)
 * @param n_f is the precision encoding value such that n < 2^{21} due to 32-bit floating point
 * @return
 */
-D3DXVECTOR3 *FibonacciNormals(D3DXVECTOR3 *pOut, unsigned int j, float n_f)
+D3DXINLINE D3DXVECTOR3 *FibonacciNormals(D3DXVECTOR3 *pOut, unsigned int j, float n_f)
 {
 #ifdef D3DX_POINTER_CHECK
-    if(pOut == NULL) {
+    if (pOut == NULL) {
         pOut = new D3DXVECTOR3();
     }
 #endif
@@ -256,10 +259,10 @@ D3DXVECTOR3 *FibonacciNormals(D3DXVECTOR3 *pOut, unsigned int j, float n_f)
 * @param n_f is the precision encoding value such that n < 2^{21} due to 32-bit floating point
 * @return
 */
-unsigned int FibonacciNormalsInv(const D3DXVECTOR3 *pA, float n_f)
+D3DXINLINE unsigned int FibonacciNormalsInv(const D3DXVECTOR3 *pA, float n_f)
 {
 #ifdef D3DX_POINTER_CHECK
-    if(pA == NULL) {
+    if (pA == NULL) {
         pA = new D3DXVECTOR3();
     }
 #endif
@@ -278,7 +281,7 @@ unsigned int FibonacciNormalsInv(const D3DXVECTOR3 *pA, float n_f)
     float F0 = std::round(Fk);
     float F1 = std::round(Fk * PHI);
 #else
-    float F0 = floorf(fabsf(Fk  + 0.5f)) * (Fk >= 0.0f ? 1.0f : -1.0f);
+    float F0 = floorf(fabsf(Fk + 0.5f)) * (Fk >= 0.0f ? 1.0f : -1.0f);
     tmp = Fk * D3DX_FB_PHI;
     float F1 = floorf(fabsf(tmp + 0.5f)) * (tmp >= 0.0f ? 1.0f : -1.0f);
 #endif
@@ -286,12 +289,12 @@ unsigned int FibonacciNormalsInv(const D3DXVECTOR3 *pA, float n_f)
     float n_f_rcp = 1.0f / n_f;
 
     D3DXMATRIX2X2 B = D3DXMATRIX2X2(
-        C_PI_2 * (madfrac(F0 + 1.0f, D3DX_FB_PHI_MINUS_ONE) -  D3DX_FB_PHI_MINUS_ONE),
-        C_PI_2 * (madfrac(F1 + 1.0f, D3DX_FB_PHI_MINUS_ONE) -  D3DX_FB_PHI_MINUS_ONE),
+        C_PI_2 * (madfrac(F0 + 1.0f, D3DX_FB_PHI_MINUS_ONE) - D3DX_FB_PHI_MINUS_ONE),
+        C_PI_2 * (madfrac(F1 + 1.0f, D3DX_FB_PHI_MINUS_ONE) - D3DX_FB_PHI_MINUS_ONE),
         -2.0f * F0 * n_f_rcp,
         -2.0f * F1 * n_f_rcp);
 
-    D3DXVECTOR2 B1; 
+    D3DXVECTOR2 B1;
     B.getRow(&B1, 1);
 
     D3DXMATRIX2X2 B_inv;
@@ -303,16 +306,16 @@ unsigned int FibonacciNormalsInv(const D3DXVECTOR3 *pA, float n_f)
     c.x = floorf(c.x);
     c.y = floorf(c.y);
 
-    float d = 1024.0f; 
+    float d = 1024.0f;
     unsigned int j = 0;
-    for(unsigned int k = 0; k < 4; k++) {
+    for (unsigned int k = 0; k < 4; k++) {
 
         D3DXVECTOR2 tmp_v2 = D3DXVECTOR2(float(k % 2), float(k / 2));
         tmp_v2 += c;
         float bias = (1.0f - n_f_rcp);
-        float cosTheta = D3DXVec2Dot(&B1, &tmp_v2) + bias; 
+        float cosTheta = D3DXVec2Dot(&B1, &tmp_v2) + bias;
 
-        cosTheta = CLAMPi(cosTheta, -1.0f, 1.0f) * 2.0f - cosTheta;            
+        cosTheta = CLAMPi(cosTheta, -1.0f, 1.0f) * 2.0f - cosTheta;
         float i = floorf(n_f * 0.5f * (1.0f - cosTheta));
 
         float phi = C_PI_2 * madfrac(i, D3DX_FB_PHI_MINUS_ONE);
@@ -325,7 +328,7 @@ unsigned int FibonacciNormalsInv(const D3DXVECTOR3 *pA, float n_f)
         q.z = sinTheta * sinf(phi);
 
         float dist_sq = D3DXVecDistanceSq(&q, pA);
-        if(dist_sq < d) {
+        if (dist_sq < d) {
             d = dist_sq;
             j = int(i);
         }

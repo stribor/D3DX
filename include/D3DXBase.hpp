@@ -6,12 +6,12 @@
 *     file, You can obtain one at http://mozilla.org/MPL/2.0/.
 **/
 
-#ifndef D3DX_MATH_UTIL_HPP
-#define D3DX_MATH_UTIL_HPP
+#ifndef D3DX_BASE_HPP
+#define D3DX_BASE_HPP
+
+#define D3DXINLINE inline
 
 #include <math.h>
-
-#include "math_constant.hpp"
 
 #ifndef MIN
     #define MIN(a, b)       (a < b ? a : b)
@@ -44,4 +44,4 @@ inline float madfrac(float a, float b)
     return float(tmp - floorf(tmp));
 }
 
-#endif //D3DX_MATH_UTIL_HPP
+#endif //D3DX_BASE_HPP

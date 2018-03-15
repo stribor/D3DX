@@ -1,6 +1,6 @@
 /**
 *     Copyright (C) 2008-2014  Francesco Banterle
-* 
+*
 *     This Source Code Form is subject to the terms of the Mozilla Public
 *     License, v. 2.0. If a copy of the MPL was not distributed with this
 *     file, You can obtain one at http://mozilla.org/MPL/2.0/.
@@ -14,7 +14,8 @@
 #define D3DX_POINTER_CHECK
 
 //classic math utils
-#include "math_util.hpp"
+#include "D3DXBase.hpp"
+#include "D3DXMathConstants.hpp"
 
 //D3DX
 #include "D3DXVECTOR2.hpp"
@@ -23,8 +24,8 @@
 #include "D3DXQUATERNION.hpp"
 #include "D3DXFunctions.hpp"
 
-#include "D3DXVECTOR3INT.hpp"
 #include "D3DXVECTOR2INT.hpp"
+#include "D3DXVECTOR3INT.hpp"
 
 #include "D3DXIOFunctions.hpp"
 #include "D3DXConstants.hpp"

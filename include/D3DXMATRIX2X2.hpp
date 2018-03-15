@@ -16,16 +16,16 @@
  */
 class D3DXMATRIX2X2
 {
- public:
-	float data[4];
-	
+public:
+    float data[4];
+
     /**
      * @brief D3DXMATRIX2X2
      */
     D3DXMATRIX2X2()
     {
     }
-	
+
     /**
      * @brief D3DXMATRIX2X2 creates and sets the matrix to (a00, a01; a10, a11).
      * @param a00
@@ -45,11 +45,11 @@ class D3DXMATRIX2X2
      * @param a10
      * @param a11
      */
-    void Init(float a00, float a01, float a10, float a11){
-	    data[0] = a00;
-	    data[2] = a10;
-	    data[1] = a01;
-	    data[3] = a11;
+    void Init(float a00, float a01, float a10, float a11) {
+        data[0] = a00;
+        data[2] = a10;
+        data[1] = a01;
+        data[3] = a11;
     }
 
     /**
@@ -58,20 +58,20 @@ class D3DXMATRIX2X2
     void Identity()
     {
         data[0] = 1.0f;
-	    data[3] = 1.0f;
-	    data[1] = 0.0f;
-	    data[2] = 0.0f;
+        data[3] = 1.0f;
+        data[1] = 0.0f;
+        data[2] = 0.0f;
     }
-	
-  	/** + operator*/
+
+    /** + operator*/
 
     /**
      * @brief operator +=
      * @param pM
      */
-    void operator += ( const D3DXMATRIX2X2 &pM)
+    void operator += (const D3DXMATRIX2X2 &pM)
     {
-        for(int i=0; i<4; i++) {
+        for (int i = 0; i < 4; i++) {
             data[i] += pM.data[i];
         }
     }
@@ -85,22 +85,22 @@ class D3DXMATRIX2X2
     {
         D3DXMATRIX2X2 pOut;
 
-        for(int i=0; i<4; i++) {
-            pOut.data[i] =  data[i] + pM.data[i];
+        for (int i = 0; i < 4; i++) {
+            pOut.data[i] = data[i] + pM.data[i];
         }
 
         return pOut;
     }
 
-  	/** - operator*/
+    /** - operator*/
 
     /**
      * @brief operator -=
      * @param pM
      */
-    void operator -= ( const D3DXMATRIX2X2 &pM)
+    void operator -= (const D3DXMATRIX2X2 &pM)
     {
-        for(int i=0; i<4; i++) {
+        for (int i = 0; i < 4; i++) {
             data[i] -= pM.data[i];
         }
     }
@@ -114,8 +114,8 @@ class D3DXMATRIX2X2
     {
         D3DXMATRIX2X2 pOut;
 
-        for(int i=0; i<4; i++) {
-            pOut.data[i] =  data[i] - pM.data[i];
+        for (int i = 0; i < 4; i++) {
+            pOut.data[i] = data[i] - pM.data[i];
         }
 
         return pOut;
@@ -127,11 +127,11 @@ class D3DXMATRIX2X2
      */
     D3DXMATRIX2X2 operator -()const
     {
-		return D3DXMATRIX2X2(-data[0], -data[1], -data[2], -data[3]);
+        return D3DXMATRIX2X2(-data[0], -data[1], -data[2], -data[3]);
     }
 
     /** * operator */
-	
+
     /**
      * @brief Mul
      * @param mA
@@ -141,29 +141,29 @@ class D3DXMATRIX2X2
      */
     static D3DXMATRIX2X2 *Mul(const D3DXMATRIX2X2 &mA, const D3DXMATRIX2X2 &mB, D3DXMATRIX2X2 *out = NULL)
     {
-        if(out == NULL) {
+        if (out == NULL) {
             out = new D3DXMATRIX2X2();
         }
 
-	    out->data[0] = mA.data[0] * mB.data[0] + mA.data[1] * mB.data[2];
-	    out->data[1] = mA.data[0] * mB.data[1] + mA.data[1] * mB.data[3];
+        out->data[0] = mA.data[0] * mB.data[0] + mA.data[1] * mB.data[2];
+        out->data[1] = mA.data[0] * mB.data[1] + mA.data[1] * mB.data[3];
 
-	    out->data[2] = mA.data[2] * mB.data[0] + mA.data[3] * mB.data[2];
-	    out->data[3] = mA.data[2] * mB.data[1] + mA.data[3] * mB.data[3];
+        out->data[2] = mA.data[2] * mB.data[0] + mA.data[3] * mB.data[2];
+        out->data[3] = mA.data[2] * mB.data[1] + mA.data[3] * mB.data[3];
 
-	    return out;
+        return out;
     }
 
     /**
      * @brief operator *=
      * @param pM
      */
-    void operator *= ( const D3DXMATRIX2X2 &pM)
+    void operator *= (const D3DXMATRIX2X2 &pM)
     {
         D3DXMATRIX2X2 pOut;
         Mul(*this, pM, &pOut);
 
-        for(int i=0;i<4;i++) {
+        for (int i = 0; i < 4; i++) {
             data[i] = pOut.data[i];
         }
     }
@@ -174,7 +174,7 @@ class D3DXMATRIX2X2
      */
     void operator *= (float v)
     {
-        for(int i=0; i<4; i++) {
+        for (int i = 0; i < 4; i++) {
             data[i] *= v;
         }
     }
@@ -212,11 +212,11 @@ class D3DXMATRIX2X2
      */
     void operator /= (float v)
     {
-        for(int i=0;i<4;i++) {
+        for (int i = 0; i < 4; i++) {
             data[i] /= v;
         }
     }
-    	
+
     /**
      * @brief Determinant computes the determinant of the matrix.
      * @return
@@ -233,38 +233,38 @@ class D3DXMATRIX2X2
      */
     D3DXMATRIX2X2 *Inverse(D3DXMATRIX2X2 *out = NULL)
     {
-        #ifdef D3DX_POINTER_CHECK
-            if(out == NULL) {
-                out =  new D3DXMATRIX2X2();
-            }
-        #endif
+#ifdef D3DX_POINTER_CHECK
+        if (out == NULL) {
+            out = new D3DXMATRIX2X2();
+        }
+#endif
 
-	    float det = Determinant();
+        float det = Determinant();
 
-        if(fabsf(det) < 1e-9f) {
+        if (fabsf(det) < 1e-9f) {
             printf("Determinant is near zero: D3DXMATRIX2X2 *D3DXMATRIX2X2::Inverse()\n");
             return new D3DXMATRIX2X2(0.0f, 0.0f, 0.0f, 0.0f);
-	    }
-		
+        }
+
         out->Init(data[3] / det, -data[1] / det, -data[2] / det, data[0] / det);
-	    return out;
+        return out;
     }
-    	
+
 
     D3DXVECTOR2 *getRow(D3DXVECTOR2 *pOut, unsigned int row)
     {
         row = row % 2;
 
-        #ifdef D3DX_POINTER_CHECK
-            if(pOut == NULL) {
-                pOut =  new D3DXVECTOR2();
-            }
-        #endif
+#ifdef D3DX_POINTER_CHECK
+        if (pOut == NULL) {
+            pOut = new D3DXVECTOR2();
+        }
+#endif
 
-            pOut->x = data[row * 2];
-            pOut->y = data[row * 2 + 1];
+        pOut->x = data[row * 2];
+        pOut->y = data[row * 2 + 1];
 
-            return pOut;
+        return pOut;
     }
 
     /**
@@ -272,7 +272,7 @@ class D3DXMATRIX2X2
      */
     void Print()
     {
-        printf("\n%3.5f %3.5f \n %3.5f %3.5f\n\n",data[0], data[1], data[2], data[3]);
+        printf("\n%3.5f %3.5f \n %3.5f %3.5f\n\n", data[0], data[1], data[2], data[3]);
     }
 };
 
